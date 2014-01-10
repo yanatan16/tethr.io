@@ -20,7 +20,7 @@ tethr.connect(room /*, options*/)
 var game = new Game()
 
 // On connect, lets start the game
-tethr.on('connect', function (my_id) {
+tethr.on('connect', function () {
   console.log('connect successful!')
 
   game.start()

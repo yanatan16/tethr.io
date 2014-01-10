@@ -1,5 +1,5 @@
 {
-  "name": "tethr.io-testgame",
+  "name": "tethr.io-example-basic-game",
   "version": "0.0.0",
   "description": "Testing out using tethr.io",
   "main": "server.js",

@@ -8,11 +8,11 @@ var rtc = require('../node_modules/webrtc.io-client/lib/webrtc.io.js')
 var events = require('events')
   , inherits = require('inherits')
 
-module.exports = new Tether()
-
 function Tether() {
   this._peers = {}
 }
+
+inherits(Tether, events.EventEmitter)
 
 Tether.prototype.connect = function (room, opts) {
   opts = opts || {}
@@ -24,8 +24,6 @@ Tether.prototype.connect = function (room, opts) {
   rtc.SERVER = function () {return ice}
   rtc.connect(protocol + '://' + host, room)
 }
-
-inherits(Tether, events.EventEmitter)
 
 Tether.prototype._listen = function() {
   var tether = this
@@ -113,6 +111,8 @@ Peer.prototype.send = function (msg) {
   }
   peer._chan.send(JSON.stringify(obj))
 }
+
+module.exports = new Tether()
 },{"../node_modules/webrtc.io-client/lib/webrtc.io.js":5,"events":3,"inherits":4}],3:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //

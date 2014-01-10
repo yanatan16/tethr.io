@@ -2,13 +2,17 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint')
   grunt.loadNpmTasks('grunt-browserify')
   grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-karma')
+  require('./test/task')(grunt)
 
   grunt.initConfig({
     cfg: {
-      files: 'lib/*.js',
+      src: 'lib/*.js',
+      tests: ['test/tests/*.js', 'test/testapp/static/*.js'],
       main: 'index.js',
       dist: 'dist/tethr.io.js',
-      distmin: 'dist/tethr.io.min.js'
+      distmin: 'dist/tethr.io.min.js',
+      karmacfg: 'test/karma.conf.js'
     },
     jshint: {
       options: {
@@ -37,7 +41,22 @@ module.exports = function (grunt) {
           module: true
         }
       },
-      files: '<%= cfg.files %>'
+      gruntfile: ['Gruntfile.js' ],
+      src: ['<%= cfg.src %>'],
+      test: {
+        options: {
+          globals: {
+            require: true,
+            exports: true,
+            module: true,
+            assert: true,
+            describe: true,
+            it: true,
+            console: true
+          }
+        },
+        files: ['<%= cfg.tests %>'],
+      }
     },
     browserify: {
       dist: {
@@ -52,10 +71,26 @@ module.exports = function (grunt) {
           '<%= cfg.distmin %>': ['<%= cfg.dist %>']
         }
       }
+    },
+    karma: {
+      test: {
+        configFile: '<%= cfg.karmacfg %>',
+        singleRun: true
+      }
     }
   })
 
-  grunt.registerTask('test', ['jshint'])
-  grunt.registerTask('dist', ['browserify:dist','uglify:dist'])
-  grunt.registerTask('default', ['test','dist'])
+  grunt.registerTask('test', [
+    'jshint',
+    'tethr', // custom, see test/task.js
+    'karma:test'
+  ])
+  grunt.registerTask('dist', [
+    'browserify:dist',
+    'uglify:dist'
+  ])
+  grunt.registerTask('default', [
+    'test',
+    'dist'
+  ])
 }
