@@ -1,0 +1,28 @@
+{
+  "name": "tethr",
+  "version": "0.0.1",
+  "description": "tethr.io provides a super-easy socket.io-like framework for managing peer-to-peer WebRTC data connections.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yanatan16/tethr.io"
+  },
+  "keywords": [
+    "webrtc",
+    "gaming",
+    "lobby",
+    "websocket"
+  ],
+  "author": "Jon Eisen <jon@joneisen.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanatan16/tethr.io/issues"
+  },
+  "homepage": "https://github.com/yanatan16/tethr.io",
+  "dependencies": {
+    "webrtc.io-client": "0.0.2-3"
+  }
+}
