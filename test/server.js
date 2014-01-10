@@ -36,7 +36,8 @@ function launchChrome(addr, cb) {
     if (err) return console.error(err)
 
     var opts = {
-        browser : 'chrome',
+      headless: true,
+      browser: 'chrome',
     };
     console.log('Launching chrome to ' + addr)
     launch(addr, opts, function (err, ps) {
