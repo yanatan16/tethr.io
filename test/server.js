@@ -23,7 +23,12 @@ module.exports = function (opts, cb) {
     function (cb) {
       setTimeout(cb, 1000)
     },
-  ], function () {
+  ], function (err) {
+    if (err) {
+      console.error(err)
+      process.exit(1)
+    }
+
     if (opts.killtime)
       setTimeout(function () { process.exit(0) }, opts.killtime)
     else if (cb)
@@ -33,17 +38,26 @@ module.exports = function (opts, cb) {
 
 function launchChrome(addr, cb) {
   launcher(function (err, launch) {
-    if (err) return console.error(err)
+    if (err) return cb(err)
 
     var opts = {
       headless: true,
-      browser: 'chrome',
+      browser: null,
     };
+
+    launch.browser.forEach(function(browser) {
+      if (browser.name.test(/^chrom/)) {
+        opts.browser = browser.name
+      }
+    })
+
+    if (!opts.browser) {
+      return cb(new Error('No chrome or chromium browser present on system'))
+    }
+
     console.log('Launching chrome to ' + addr)
     launch(addr, opts, function (err, ps) {
-      if (err) return console.error(err);
-
-      cb()
+      cb(err)
     });
   });
 }
