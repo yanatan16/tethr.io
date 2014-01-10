@@ -1,6 +1,6 @@
 {
   "name": "tethr.io",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "tethr.io provides a super-easy socket.io-like framework for managing peer-to-peer WebRTC data connections.",
   "main": "index.js",
   "scripts": {
