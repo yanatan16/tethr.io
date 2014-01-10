@@ -1,1 +1,1 @@
-module.exports = require('lib/tethr')
+module.exports = require('./lib/tethr')
