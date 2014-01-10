@@ -45,7 +45,7 @@ function launchChrome(addr, cb) {
       browser: null,
     };
 
-    launch.browser.forEach(function(browser) {
+    launch.browsers.forEach(function(browser) {
       if (browser.name.test(/^chrom/)) {
         opts.browser = browser.name
       }
