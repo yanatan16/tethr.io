@@ -24,8 +24,7 @@
   "homepage": "https://github.com/yanatan16/tethr.io",
   "dependencies": {
     "webrtc.io-client": "git+https://github.com/yanatan16/webrtc.io-client",
-    "events-browserify": "0.0.1",
-    "util": "~0.10.2"
+    "inherits": "~2.0.1"
   },
   "devDependencies": {
     "browserify": "~3.19.1",

@@ -33,7 +33,8 @@ module.exports = function (grunt) {
 
         globals: {
           require: true,
-          exports: true
+          exports: true,
+          module: true
         }
       },
       files: '<%= cfg.files %>'
