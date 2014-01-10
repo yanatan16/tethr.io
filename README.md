@@ -6,7 +6,7 @@ tethr.io builds off the great work of [WebRTC.io](https://github.com/webRTC/WebR
 
 This library focuses on _data_ streams, and (currently) provides no mechanisms for video or audio streams (pull requests are encouraged!).
 
-A great use for tethr.io is multiplayer games! I'm setting up an example game right now using tethr.io.
+A great use for tethr.io is multiplayer games or chat infrastructure! Theres a small ["game" example](https://github.com/yanatan16/tethr.io/tree/master/examples/basic-game) in the examples folder.
 
 #### [Examples](https://github.com/yanatan16/tethr.io/tree/master/examples)
 
@@ -79,6 +79,37 @@ On the backend, you'll still need a webrtc.io signaling server, which [webrtc.io
 ```javascript
 var rtc = require('webrtc.io')
 rtc.listen(port || httpServer)
+```
+
+## Testing
+
+WebRTC introduces clients talking to one another, which is a breaking change to the assumptions of normal browser-based testing. First of all, its a browser-only thing and theres no testing mocks for other environments like node. Secondly, most browser testing frameworks work under the assumption that different browsers windows will never interact and are never needed. But under WebRTC, this is exactly what is required.
+
+So to test, we run a custom setup which launches a web server (running `webrtc.io` as a signaling backend) and a chrome instance which will ping/pong requests to a certain room on that signaling server. Then we launch browser-based testing in [karma](http://karma-runner.github.io).
+
+```
+grunt test
+```
+
+will run jshint on the code, then startup the server, then run the karma tests in a single-run mode. To do live testing, you can startup the servers yourself.
+
+The backend signaling server:
+
+```
+node test/test
+```
+
+The karma server:
+
+```
+npm install -g karma
+karma start test/karma.conf.js
+```
+
+Then run karma tests:
+
+```
+karma run
 ```
 
 ## License
