@@ -70,6 +70,15 @@ tethr.on('join', function (peer) {
 })
 ```
 
+## Backend
+
+On the backend, you'll still need a webrtc.io signaling server, which [webrtc.io](https://github.com/webRTC/webrtc.io) provides. Just do the following:
+
+```javascript
+var rtc = require('webrtc.io')
+rtc.listen(port || httpServer)
+```
+
 ## License
 
 MIT License in `LICENSE` file.
