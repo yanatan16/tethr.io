@@ -1,0 +1,23 @@
+{
+  "name": "tethr.io-testgame",
+  "version": "0.0.0",
+  "description": "Testing out using tethr.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Eisen <jon@joneisen.me>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.4.7",
+    "webrtc.io": "0.0.4",
+    "enchilada": "~0.7.1",
+    "deep-equal": "~0.1.2",
+    "events-browserify": "0.0.1",
+    "util": "~0.10.2",
+    "tethr.io": "0.0.2"
+  },
+  "engines": {
+    "node": "~0.10"
+  }
+}

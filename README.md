@@ -8,6 +8,8 @@ This library focuses on _data_ streams, and (currently) provides no mechanisms f
 
 A great use for tethr.io is multiplayer games! I'm setting up an example game right now using tethr.io.
 
+#### [Examples](https://github.com/yanatan16/tethr.io/tree/master/examples)
+
 ## Install
 
 The easiest way to install is to use browserify or component.
