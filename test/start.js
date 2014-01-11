@@ -1,7 +1,7 @@
 // test.js
 // This is a executable that wraps the harness for running the tethr.io tests
 
-var server = require('server')
+var server = require('./server')
 
 // Test port
 var port = 18101
@@ -20,7 +20,6 @@ process.argv.slice(1).forEach(function (arg) {
 })
 
 server({
-  browser: browser,
   port: port,
   killtime: killtime
 })

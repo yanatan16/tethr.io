@@ -5,9 +5,6 @@ module.exports = function(config) {
     frameworks: ['mocha', 'browserify', 'chai'],
     browsers: [
       'Chrome',
-      // 'ChromeCanary',
-      // 'Firefox',
-      // 'Opera'
     ],
     files: [
       'index.js',
