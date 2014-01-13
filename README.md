@@ -36,10 +36,12 @@ The best way to describe it is by example!
 var tethr = require('tethr.io')
 
 // Setup a connection to the backend to tell us of peers
-tethr.connect('my-room', {
-  host: 'myserver:8001',
-  ice: null, // ICE options. See WebRTC docs. Leave blank if you don't know
-  secure: false // forces wss://
+tethr.connect({
+  server: 'myserver:8001',
+  room: 'my-room',
+  ice: null, // ICE options. See WebRTC docs. Leave blank if your testing on a LAN
+  secure: false, // forces wss
+  reconnect_limit: 1, // websocket reconnects
 })
 
 // tethr is an EventEmitter, so we'll use events to communicate
@@ -53,7 +55,7 @@ tethr.on('error', function (err) {
 })
 
 // tethr can broadcast to all connected peers in the room
-tethr.broadcast({some: 'message', of: 'importance'})
+tethr.broadcast('broadcast-update', {some: 'message', of: 'importance'})
 
 // Here's the magic. This event fires when a peer joins the room
 tethr.on('join', function (peer) {
@@ -61,8 +63,8 @@ tethr.on('join', function (peer) {
   // peer.id is a unique identifier of every peer ever. A reconnecting peer _should_ have the same ID
   // peer is also an EventEmitter, so we use events to work with it too!
 
-  // We can receive messages from this peer
-  peer.on('message', function (msg) {
+  // We can receive custom events from this peer
+  peer.on('custom-event', function (obj) {
     // do something
   })
 
@@ -71,8 +73,8 @@ tethr.on('join', function (peer) {
     // sad... do something
   })
 
-  // Finally, we can send messages to the peer whenever we like
-  peer.send({some: 'message', just: 4, you: null})
+  // Finally, we can send custom events and messages to the peer whenever we like
+  peer.send('custom-event', {some: 'message', just: 4, you: null})
 })
 ```
 
