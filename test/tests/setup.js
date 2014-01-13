@@ -53,8 +53,8 @@ function timeout(time, done) {
 
 // Other testers might be here, we need to figure out who is the pingpeer
 function isPingPeer(peer,cb) {
-  peer.once('message', function (msg) {
-    if (msg.iam === 'ping') {
+  peer.once('iam', function (msg) {
+    if (msg === 'ping') {
       cb(peer)
     }
   })

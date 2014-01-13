@@ -29,7 +29,6 @@ Game.prototype.current = function () {
 
 Game.prototype.start = function () {
   var game = this;
-  console.log('starting game!', game._id)
 
   var pos = [Math.floor(Math.random() * game.$board.height()), Math.floor(Math.random() * game.$board.width())];
 
@@ -68,8 +67,6 @@ Game.prototype.addPlayer = function (id) {
   game.$board.append(plyr.$)
 
   game.players[id] = plyr
-
-  console.log('Added player', id)
 }
 
 Game.prototype.initControls = function () {
