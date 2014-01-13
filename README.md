@@ -10,6 +10,10 @@ A great use for tethr.io is multiplayer games or chat infrastructure! Theres a s
 
 #### [Examples](https://github.com/yanatan16/tethr.io/tree/master/examples)
 
+### Compatibility
+
+Currently compatible with stable Chrome 31. Stable Firefox-firefox connections should be viable shortly.
+
 ## Install
 
 The easiest way to install is to use browserify or component.
