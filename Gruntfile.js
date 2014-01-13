@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     cfg: {
-      src: 'lib/*.js',
+      src: ['lib/*.js', '!lib/old_*.js'],
       tests: ['test/tests/*.js', 'test/testapp/static/*.js'],
       main: 'index.js',
       dist: 'dist/tethr.io.js',
@@ -76,6 +76,9 @@ module.exports = function (grunt) {
       test: {
         configFile: '<%= cfg.karmacfg %>',
         singleRun: true
+      },
+      server: {
+        configFile: '<%= cfg.karmacfg %>'
       }
     }
   })

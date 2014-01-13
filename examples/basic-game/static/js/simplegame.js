@@ -14,7 +14,15 @@ var deepEqual = require('deep-equal')
 var room = window.document.location.pathname.toString().split('/')[1]
 
 // Startup the tethr. (It takes options, but we're fine for now)
-tethr.connect(room /*, options*/)
+tethr.connect({
+  room: room,
+  server: window.document.location.host,
+  ice: {
+    iceServers: [{ url: 'stun:stun.l.google.com:19302' }]
+  },
+  secure: false,
+  reconnect_limit: 0
+})
 
 // New Game!
 var game = new Game()
@@ -40,28 +48,30 @@ function startUpdate() {
   setInterval(function () {
     var newState = game.current() // Get current state
     if (!deepEqual(newState, state)) {
-      state = newState
-      tethr.broadcast(state)
+      state = newState.map(function (x) { return x })
+      tethr.broadcast('update', state)
     }
   }, updateInterval)
 }
 
 // Here's the magic, a peer has just joined
 tethr.on('join', function (peer) {
+  console.log('peer joining:', peer.id)
 
   // Notify the game
   game.join(peer.id)
 
-  // On any message from the peer, lets notify the game
-  peer.on('message', function (msg) {
-    game.message(msg, peer.id)
+  // On any update message from the peer, lets notify the game
+  peer.on('update', function (update) {
+    game.updatePlayer(peer.id, update)
   })
 
   // If the peer leaves, notify the game
   peer.on('leave', function () {
+    console.log('peer leaving:', peer.id)
     game.leave(peer.id)
   })
 
   // Send the peer our last updated state on initialization
-  peer.send(game.current())
+  peer.send('update', game.current())
 })

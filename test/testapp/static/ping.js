@@ -4,9 +4,10 @@
 var tethr = require('../../../index.js') // normally: require('tethr.io')
 
 
-tethr.connect('tethr-test', {
+tethr.connect({
   ice: null, /* will only work without any NATs in the way */
-  host: 'localhost:18101'
+  server: 'localhost:18101',
+  room: 'tethr-test'
 })
 log('Connecting')
 
@@ -15,19 +16,14 @@ tethr.on('connect', function () {
 })
 
 tethr.on('join', function (peer) {
-  log('got peer!')
+  log('got peer! ' + peer.id)
 
-  peer.on('message', function (msg) {
-    if (msg.msg === 'ping') {
-      msg.msg = 'pong'
-    } else {
-      msg.msg = 'unpong'
-    }
-
-    peer.send(msg)
+  peer.on('ping', function (data) {
+    log('ping! ' + data + ' from ' + peer.id)
+    peer.send('pong', data)
   })
 
-  peer.send({iam: 'ping'})
+  peer.send('iam', 'ping')
 })
 
 function log(msg) {

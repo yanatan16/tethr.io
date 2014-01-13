@@ -35,9 +35,9 @@ describe('tethr-peer-pingpong', function () {
   it('should pong my ping', function (done) {
     done = testTethr.timeout(1000, done)
     testTethr.once('ping-join', function (peer) {
-      peer.send({ msg:'ping' })
-      peer.once('message', function (msg) {
-        assert.deepEqual(msg, {msg: 'pong'})
+      peer.send('ping', 'msg')
+      peer.once('pong', function (msg) {
+        assert.equal(msg, 'msg')
         done()
       })
     })
@@ -45,9 +45,9 @@ describe('tethr-peer-pingpong', function () {
   it('should unpong my unping (broadcast)', function (done) {
     done = testTethr.timeout(1000, done)
     testTethr.once('ping-join', function (peer) {
-      testTethr.tethr.broadcast({ msg: 'unping' })
-      peer.once('message', function (msg) {
-        assert.deepEqual(msg, {msg: 'unpong'})
+      testTethr.tethr.broadcast('ping', 'bcast')
+      peer.once('pong', function (msg) {
+        assert.equal(msg, 'bcast')
         done()
       })
     })

@@ -1,9 +1,10 @@
 var tethr = require('../../index')
 
 // setup
-tethr.connect('tethr-test', {
+tethr.connect({
   ice: null,
-  host: 'localhost:18101'
+  server: 'localhost:18101',
+  room: 'tethr-test'
 })
 
 // Just in case these events happen before our tests
@@ -53,8 +54,8 @@ function timeout(time, done) {
 
 // Other testers might be here, we need to figure out who is the pingpeer
 function isPingPeer(peer,cb) {
-  peer.once('message', function (msg) {
-    if (msg.iam === 'ping') {
+  peer.once('iam', function (msg) {
+    if (msg === 'ping') {
       cb(peer)
     }
   })

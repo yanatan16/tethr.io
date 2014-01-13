@@ -9,4 +9,9 @@ module.exports = function (grunt) {
 
     server({}, done)
   })
+
+  grunt.registerTask('tethr:server', function () {
+    this.async()
+    server({})
+  })
 }
