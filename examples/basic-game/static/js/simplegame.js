@@ -14,7 +14,15 @@ var deepEqual = require('deep-equal')
 var room = window.document.location.pathname.toString().split('/')[1]
 
 // Startup the tethr. (It takes options, but we're fine for now)
-tethr.connect(room /*, options*/)
+tethr.connect({
+  room: room,
+  server: window.document.location.host,
+  ice: {
+    iceServers: [{ url: 'stun:stun.l.google.com:19302' }]
+  },
+  secure: false,
+  reconnect_limit: 0
+})
 
 // New Game!
 var game = new Game()

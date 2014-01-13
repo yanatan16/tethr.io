@@ -1,9 +1,10 @@
 var tethr = require('../../index')
 
 // setup
-tethr.connect('tethr-test', {
+tethr.connect({
   ice: null,
-  host: 'localhost:18101'
+  server: 'localhost:18101',
+  room: 'tethr-test'
 })
 
 // Just in case these events happen before our tests

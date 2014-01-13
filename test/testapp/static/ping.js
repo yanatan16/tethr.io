@@ -4,9 +4,10 @@
 var tethr = require('../../../index.js') // normally: require('tethr.io')
 
 
-tethr.connect('tethr-test', {
+tethr.connect({
   ice: null, /* will only work without any NATs in the way */
-  host: 'localhost:18101'
+  server: 'localhost:18101',
+  room: 'tethr-test'
 })
 log('Connecting')
 
