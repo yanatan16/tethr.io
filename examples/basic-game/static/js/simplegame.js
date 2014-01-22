@@ -13,7 +13,10 @@ var deepEqual = require('deep-equal')
 // You can customize what room to join, but this just grabs the first path element
 var room = window.document.location.pathname.toString().split('/')[1]
 
-// Startup the tethr. (It takes options, but we're fine for now)
+tethr.connect()
+
+// OR
+
 tethr.connect({
   room: room,
   server: window.document.location.host,
